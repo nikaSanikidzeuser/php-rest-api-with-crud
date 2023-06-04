@@ -34,14 +34,14 @@ class User
         $this->job = htmlspecialchars(strip_tags($this->job));
         $this->cv = htmlspecialchars(strip_tags($this->cv));
         $this->user_image = htmlspecialchars(strip_tags($this->user_image));
-        $this->experience = htmlspecialchars(strip_tags($this->experience));
+        
         $stmt = "INSERT INTO " . $this->db_table .
             " SET name= '" . $this->name . "',
             email= '" . $this->email . "',
             job= '" . $this->job . "',
             cv= '" . $this->cv . "',
-            user_image= '" . $this->user_image . "',
-            experience= '" . $this->experience . "'";
+            user_image= '" . $this->user_image . "'";
+            
         $this->db->query($stmt);
 
         if ($this->db->affected_rows > 0) {
