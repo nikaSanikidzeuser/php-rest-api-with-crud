@@ -10,8 +10,9 @@ $DbConnection = new DbConnection();
 $db = $DbConnection->getConnection();
 $item = new user($db);
 $item->id = isset($_GET['id']) ? $_GET['id'] : die();
+
 $item->getSingleUser();
-if ($item->name != null) {
+if ($item->id != null) {
     $user_arr = array(
         "id" => $item->id,
         "name" => $item->name,

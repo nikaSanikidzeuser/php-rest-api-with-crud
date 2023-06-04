@@ -19,7 +19,7 @@ $item->job = $_GET['job'];
 $item->user_image = $_GET['user_image'];
 
 if($item->updateUser()){
-    $item->updateUser();
+   
     echo json_encode("User data updated");
 
 }else{
