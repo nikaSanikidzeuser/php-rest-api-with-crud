@@ -27,39 +27,39 @@ if (empty($item->id)) {
         "message" => "id parameter is empty or doesnt exist"
     );
     echo json_encode($response);
-} elseif (empty($item->name)) {
+} elseif (empty($item->name) || !preg_match("/^[a-zA-Z]+$/", $item->name)) {
 
     $response = array(
         "code" => 400,
         "message" => "name parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->email)) {
+} elseif (empty($item->email) || !filter_var($item->email, FILTER_VALIDATE_EMAIL)) {
 
     $response = array(
         "code" => 400,
         "message" => "email parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->cv)) {
+} elseif (empty($item->cv) || !preg_match("/\.(pdf|docx)$/i", $item->cv)) {
 
     $response = array(
         "code" => 400,
         "message" => "cv parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->job)) {
+} elseif (empty($item->job) ||  !preg_match("/^[a-zA-Z]+$/", $item->job)) {
 
     $response = array(
         "code" => 400,
         "message" => "job parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->user_image)) {
+} elseif (empty($item->user_image) || !preg_match("/\.(png|jpeg|jpg)$/i", $item->user_image)) {
 
     $response = array(
         "code" => 400,
-        "message" => "user_iamge parameter is empty or bad format"
+        "message" => "user_image parameter is empty or bad format"
     );
     echo json_encode($response);
 } else {
@@ -74,7 +74,7 @@ if (empty($item->id)) {
 
         $response = array(
             "code" => 400,
-            "message" => "user data could not be updated."
+            "message" => "user data is the same"
         );
         echo json_encode($response);
     }
