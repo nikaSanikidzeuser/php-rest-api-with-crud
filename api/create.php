@@ -32,14 +32,14 @@ if (empty($item->name) || !preg_match("/^[a-zA-Z]+$/", $item->name)) {
         "message" => "email parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->cv)) {
+} elseif (empty($item->cv) || !preg_match("/\.(pdf|docx)$/i",$item->cv)) {
 
     $response = array(
         "code" => 400,
         "message" => "cv parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->job)) {
+} elseif (empty($item->job || !preg_match("/^[a-zA-Z]+$/", $item->job))) {
 
     $response = array(
         "code" => 400,
