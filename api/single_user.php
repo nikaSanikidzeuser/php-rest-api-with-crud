@@ -1,7 +1,7 @@
 <?php
+error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-
 
 include_once '../DbConnection.php';
 include_once '../user.php';
@@ -9,7 +9,7 @@ include_once '../user.php';
 $DbConnection = new DbConnection();
 $db = $DbConnection->getConnection();
 $item = new user($db);
-$item->id = isset($_GET['id']) ? $_GET['id'] : die();
+$item->id = isset($_GET['id']) ? $_GET['id'] : '';
 
 $item->getSingleUser();
 if ($item->name != null) {
@@ -29,5 +29,8 @@ if ($item->name != null) {
         "code" => 400,
         "message" => "user does not exist"
     );
+    http_response_code(400);
     echo json_encode($response);
+   
 }
+?>
