@@ -33,24 +33,22 @@ if (empty($item->name) || !preg_match("/^[a-zA-Z]+$/", $item->name)) {
     );
     echo json_encode($response);
 } elseif (empty($item->cv) || !preg_match("/\.(pdf|docx)$/i",$item->cv)) {
-
     $response = array(
         "code" => 400,
         "message" => "cv parameter is empty or bad format"
     );
     echo json_encode($response);
 } elseif (empty($item->job || !preg_match("/^[a-zA-Z]+$/", $item->job))) {
-
     $response = array(
         "code" => 400,
         "message" => "job parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->user_image)) {
+} elseif (empty($item->user_image) || !preg_match("/\.(png|jpeg|jpg)$/i",$item->user_image)) {
 
     $response = array(
         "code" => 400,
-        "message" => "user_iamge parameter is empty or bad format"
+        "message" => "user_image parameter is empty or bad format"
     );
     echo json_encode($response);
 } else {
