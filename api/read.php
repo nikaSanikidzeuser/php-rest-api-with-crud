@@ -5,7 +5,6 @@ include_once "../DbConnection.php";
 include_once "../user.php";
 
 $DbConnection = new DbConnection();
-
 $db = $DbConnection->getConnection();
 $items = new user($db);
 $records = $items->getUsers();
@@ -20,8 +19,8 @@ if($itemCount > 0)
         array_push($userArr["body"], $row);
     }
     echo json_encode($userArr);
-
 } else {
+    
     http_response_code(404);
     echo json_encode(array("message" => "no record found"));
 }
