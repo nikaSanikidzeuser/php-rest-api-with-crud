@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -17,8 +18,18 @@ $item->cv = $_GET['cv'];
 $item->job = $_GET['job'];
 $item->user_image = $_GET['user_image'];
 
-if ($item->createUser()) {
-    echo "User created successfully";
+if (empty($item->name) || empty($item->email) || empty($item->cv) || empty($item->job) || empty($item->user_image)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "Incomplete data. All fields are required."
+    );
+    echo json_encode($response);
 } else {
-    echo "User Could not be created";
+    if ($item->createUser()) {
+        // No output
+        http_response_code(204); // No Content
+    } else {
+        http_response_code(500); // Internal Server Error
+    }
 }
