@@ -12,7 +12,10 @@ class User
     public $cv;
     public $user_image;
     public $experience;
-
+    public $job_title;
+    public $job_location;
+    public $start_date;
+    public $end_date;
     public $result;
 
     public function __construct($db)
