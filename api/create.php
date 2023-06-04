@@ -18,6 +18,7 @@ $item->cv = $_GET['cv'];
 $item->job = $_GET['job'];
 $item->user_image = $_GET['user_image'];
 
+
 if (empty($item->name) || !preg_match("/^[a-zA-Z]+$/", $item->name)) {
 
     $response = array(

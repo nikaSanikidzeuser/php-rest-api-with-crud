@@ -35,16 +35,16 @@ class User
         $this->name = htmlspecialchars(strip_tags($this->name));
         $this->email = htmlspecialchars(strip_tags($this->email));
         $this->job = htmlspecialchars(strip_tags($this->job));
-        $this->cv = htmlspecialchars(strip_tags($this->cv));
-        $this->user_image = htmlspecialchars(strip_tags($this->user_image));
-        
+        $this->cv = stripslashes($this->cv);
+        $this->user_image = stripslashes($this->user_image);
+
         $stmt = "INSERT INTO " . $this->db_table .
             " SET name= '" . $this->name . "',
             email= '" . $this->email . "',
             job= '" . $this->job . "',
             cv= '" . $this->cv . "',
             user_image= '" . $this->user_image . "'";
-            
+
         $this->db->query($stmt);
 
         if ($this->db->affected_rows > 0) {
@@ -62,7 +62,7 @@ class User
 
 
         $record  = $this->db->query($stmt);
-        if($record === false){
+        if ($record === false) {
             echo "error query" . $this->db->error;
             return;
         }
@@ -72,7 +72,6 @@ class User
         $this->job = $dataRow['job'];
         $this->cv = $dataRow['cv'];
         $this->user_image = $dataRow['user_image'];
-       
     }
 
     public function updateUser()
@@ -84,13 +83,13 @@ class User
         $this->user_image = htmlspecialchars(strip_tags($this->user_image));
         $this->id = htmlspecialchars(strip_tags($this->id));
         $stmt = "UPDATE " . $this->db_table .
-        " SET name = '".$this->name."',
-        email = '". $this->email."',
+            " SET name = '" . $this->name . "',
+        email = '" . $this->email . "',
         job = '" . $this->job . "',
         cv = '" . $this->cv . "',
         user_image = '" . $this->user_image . "'
-        WHERE id = '". $this->id . "'";
-        
+        WHERE id = '" . $this->id . "'";
+
         $this->db->query($stmt);
         if ($this->db->affected_rows > 0) {
             return true;
@@ -98,20 +97,19 @@ class User
             return false;
         }
     }
-    
-    
+
+
 
     public function deleteUser()
     {
         $stmt = "DELETE FROM " . $this->db_table . " WHERE id = '" . $this->id . "'";
         $this->db->query($stmt);
-    
+
         if ($this->db->affected_rows > 0) {
             return true;
         } else {
-    
+
             return false;
         }
     }
-    
 }

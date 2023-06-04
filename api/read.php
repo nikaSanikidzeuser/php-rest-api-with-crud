@@ -18,7 +18,7 @@ if($itemCount > 0)
     while($row = $records->fetch_assoc()){
         array_push($userArr["body"], $row);
     }
-    echo json_encode($userArr);
+    echo json_encode($userArr,JSON_UNESCAPED_SLASHES);
 } else {
     
     $response = array(

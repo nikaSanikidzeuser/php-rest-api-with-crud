@@ -23,7 +23,7 @@ if ($item->name != null) {
     );
 
     http_response_code(200);
-    echo json_encode($user_arr);
+    echo json_encode($user_arr,JSON_UNESCAPED_SLASHES);
 } else {
     $response = array(
         "code" => 400,
