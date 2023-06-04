@@ -25,7 +25,7 @@ if (empty($item->name) || !preg_match("/^[a-zA-Z]+$/", $item->name)) {
         "message" => "name parameter is empty or bad format"
     );
     echo json_encode($response);
-} elseif (empty($item->email)) {
+} elseif (empty($item->email) || !filter_var($item->email, FILTER_VALIDATE_EMAIL)) {
 
     $response = array(
         "code" => 400,
