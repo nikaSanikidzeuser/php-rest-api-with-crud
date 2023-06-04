@@ -12,7 +12,7 @@ $item = new user($db);
 $item->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 $item->getSingleUser();
-if ($item->id != null) {
+if ($item->name != null) {
     $user_arr = array(
         "id" => $item->id,
         "name" => $item->name,
@@ -25,6 +25,9 @@ if ($item->id != null) {
     http_response_code(200);
     echo json_encode($user_arr);
 } else {
-    http_response_code(404);
-    echo json_encode("User not Found");
+    $response = array(
+        "code" => 400,
+        "message" => "user does not exist"
+    );
+    echo json_encode($response);
 }

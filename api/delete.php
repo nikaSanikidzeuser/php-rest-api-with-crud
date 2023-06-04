@@ -14,8 +14,15 @@ $item = new User($db);
 $item->id = isset($_GET['id']) ? $_GET['id'] : die();
 
 if ($item->deleteUser()) {
-    
-    echo json_encode("user deleted");
+    $response = array(
+        "code" => 200,
+        "message" => "user deleted"
+    );
+    echo json_encode($response);
 } else {
-    echo json_decode("data could not be updated");
+    $response = array(
+        "code" => 400,
+        "message" => "user does not exist"
+    );
+    echo json_encode($response);
 }

@@ -21,6 +21,9 @@ if($itemCount > 0)
     echo json_encode($userArr);
 } else {
     
-    http_response_code(404);
-    echo json_encode(array("message" => "no record found"));
+    $response = array(
+        "code" => 400,
+        "message" => "no recod found"
+    );
+    echo json_encode($response);
 }

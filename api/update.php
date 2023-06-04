@@ -11,17 +11,71 @@ $DbConnection = new DbConnection();
 $db = $DbConnection->getConnection();
 $item = new User($db);
 
-$item->id = isset($_GET['id']) ? $_GET['id'] : die();
-$item->name = $_GET['name'];
-$item->email = $_GET['email'];
-$item->cv = $_GET['cv'];
-$item->job = $_GET['job'];
-$item->user_image = $_GET['user_image'];
+$item->id = isset($_GET['id']) ? $_GET['id'] : '';
 
-if($item->updateUser()){
-   
-    echo json_encode("User data updated");
+$item->name = isset($_GET['name']) ? $_GET['name'] : '';
+$item->email = isset($_GET['email']) ? $_GET['email'] : '';
+$item->cv = isset($_GET['cv']) ? $_GET['cv'] : '';
+$item->job = isset($_GET['job']) ? $_GET['job'] : '';
+$item->user_image = isset($_GET['user_image']) ? $_GET['user_image'] : '';
 
-}else{
-    echo json_encode("data could not be updated");
+
+if (empty($item->id)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "id parameter is empty or doesnt exist"
+    );
+    echo json_encode($response);
+} elseif (empty($item->name)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "name parameter is empty or bad format"
+    );
+    echo json_encode($response);
+} elseif (empty($item->email)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "email parameter is empty or bad format"
+    );
+    echo json_encode($response);
+} elseif (empty($item->cv)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "cv parameter is empty or bad format"
+    );
+    echo json_encode($response);
+} elseif (empty($item->job)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "job parameter is empty or bad format"
+    );
+    echo json_encode($response);
+} elseif (empty($item->user_image)) {
+
+    $response = array(
+        "code" => 400,
+        "message" => "user_iamge parameter is empty or bad format"
+    );
+    echo json_encode($response);
+} else {
+
+    if ($item->updateUser()) {
+        $response = array(
+            "code" => 200,
+            "message" => "User data updated."
+        );
+        echo json_encode($response);
+    } else {
+
+        $response = array(
+            "code" => 400,
+            "message" => "user data could not be updated."
+        );
+        echo json_encode($response);
+    }
 }

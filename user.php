@@ -60,7 +60,7 @@ class User
 
         $record  = $this->db->query($stmt);
         if($record === false){
-            echo "erro query" . $this->db->error;
+            echo "error query" . $this->db->error;
             return;
         }
         $dataRow = $record->fetch_assoc();
@@ -79,7 +79,6 @@ class User
         $this->job = htmlspecialchars(strip_tags($this->job));
         $this->cv = htmlspecialchars(strip_tags($this->cv));
         $this->user_image = htmlspecialchars(strip_tags($this->user_image));
-        
         $this->id = htmlspecialchars(strip_tags($this->id));
         $stmt = "UPDATE " . $this->db_table .
         " SET name = '".$this->name."',
@@ -87,8 +86,8 @@ class User
         job = '" . $this->job . "',
         cv = '" . $this->cv . "',
         user_image = '" . $this->user_image . "'
-        WHERE id = ". $this->id;
-    
+        WHERE id = '". $this->id . "'";
+        
         $this->db->query($stmt);
         if ($this->db->affected_rows > 0) {
             return true;
@@ -96,16 +95,20 @@ class User
             return false;
         }
     }
+    
     
 
     public function deleteUser()
     {
-        $stmt = "DELETE FROM " . $this->db_table . " WHERE id = " . $this->id;
+        $stmt = "DELETE FROM " . $this->db_table . " WHERE id = '" . $this->id . "'";
         $this->db->query($stmt);
+    
         if ($this->db->affected_rows > 0) {
             return true;
         } else {
+    
             return false;
         }
     }
+    
 }
