@@ -3,7 +3,7 @@ php rest api with crud
 example:
 
 for all record read: api/read.php;            
-for single record read: api/single_user.php?id={id};
+for single record read: api/single_user.php?id={id};                                                                                                                           
 for create record : api/create.php?name={name}&email={email}&cv={cv}&job={job}&user_image={user_image};                                                  
 for update record: api/update.php?id={id}&name={name}&email={email}&cv={cv}&job={job}&user_image={user_image};                                                                                        
 for delete record: api/delete.php?id={id};
